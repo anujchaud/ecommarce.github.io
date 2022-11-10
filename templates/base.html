@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>productalyourhome.com</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body style="background:#1111">
+<div class="row" style="background:#1111">
+
+    <b><nav class="navbar navbar-dark">
+        <ul class="nav navbar-nav" style="margin-left:20px;font-size:large;">
+            <li><div style=color:red;font-size:xx-large;font-family:mospace;color:navy;"><b>productatyourhome.com</b></div></li>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/cart">Cart</a></li>
+            <li><a href="/myorder">My Order</a></li>
+            <li><a href="" type="button" data-toggle="modal" data-target="#myModal">Improve Your Address</a href=""></li>
+            <li><a href="/logout">logout</a></li>
+        </ul>
+        <span>
+                <form class="form-inline" style="margin-top:8px">
+                <input class="form-control" type="search" placeholder="{{request.user}} Search hear..." aria-label="Search" style="width:300px">
+                <button class="btn btn-outline-success my-2 my-sm-0 bg-primary" type="submit">Search</button>
+            </form></span>
+    </nav>
+</div>
+{% block body %}
+{% endblock %}
+</body>
+</html>

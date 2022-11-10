@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>productalyourhome.com</title>
+    {% extends "base.html" %}
+    {% load cart %}
+</head>
+<body>
+{% block body %}
+{% for i in data %}
+
+
+<center>
+    <div class="row" style="width:90%;background:white;height:auto;margin-bottom:10px;color:wite;border-radius:20px">
+        <div class="col-sm-3" style="margin-bottom:10px;background:yelow;margin-left:10px">
+            <img src="/media/{{i.image}}" alt="" width="200px" style="margin-top:5px">
+        </div>
+        <div class="col-sm-7" style="background:bl;font-size: large;font: menu;text-align:left">
+            <h4>
+                <table>
+                    <tr>
+                        <td>
+                            Product Name :
+                        </td>
+                        <th>
+                            {{i.pname}}
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Product Prize :
+                        </td>
+                        <td>
+                            RS. {{i.prize}}{{i.quantity_type}}.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Product Title :
+                        </td>
+                        <td>
+                            {{i.ptitle}}.
+                        </td>
+                    </tr>
+
+                </table>
+            </h4>
+
+            <div class="bg-dangr">
+
+                <a href="/delete_cart/{{i.id}}" class="btn btn-danger">Remove from cart</a>
+                <a href="/order/{{i.id}}" class="btn btn-primary">Place Order</a>
+            </div>
+        </div>
+    {%empty%}
+        <h3 class="text-center text-primary bg-light" style="background-color:white;">Currently not Add any item in cart</h3>
+
+    </div>
+    {% endfor %}
+    {% endblock %}

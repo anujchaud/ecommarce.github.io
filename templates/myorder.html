@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>productalyourhome.com</title>
+    {% extends "base.html" %}
+    {% load cart %}
+</head>
+<body>
+{% block body %}
+<center>
+    <div class="row shadow" style="width:100%;background:white;height:auto;margin-bottom:10px;color:wite;border-radius:5px;margin-top:10px">
+        <h1 style="color:blue"><b>Your All Orders</h1>
+    </div>
+
+{% for i in user_order %}
+
+
+<div class="row shadow" style="width:90%;background:white;height:auto;margin-bottom:10px;color:wite;border-radius:20px">
+    <div class="col-sm-2" style="margin-bottom:10px;background:yellw;margin-left:10px">
+         <img src="/media/{{i.product.image}}" alt="" width="200px" style="margin-top:5px">
+    </div>
+    <div class="col-sm-7" style="background:ble;margin-left:px;font-size: large;font:menu;text-align:left">
+        <h4><table>
+            <tr>
+                <td>
+                    Order ID :
+                </td>
+                <td>
+                    {{i.id}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Product Name :
+                </td>
+                <th>
+                    {{i.product.pname}}
+                </th>
+            </tr>
+
+            <tr>
+                <td>
+                    Product Prize :
+                </td>
+                <td>
+                    {{i.prize}}{{i.product.quantity_type}}
+                </td>
+            </tr>
+
+              <tr>
+                <td>
+                    Product Quantity :
+                </td>
+                <td>
+                    {{i.quantity}}.
+                </td>
+            </tr>
+
+             <tr>
+                <td>
+                    Product Prize :
+                </td>
+                <th>
+                    Rs. {{i.total_prize}}
+                </th>
+            </tr>
+
+             <tr>
+                <td>
+                    Order Date :
+                </td>
+                <td>
+                    {{i.order_data}}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Order Time :
+                </td>
+                <td>
+                    {{i.order_time}}
+                </td>
+            </tr>
+
+               <tr>
+                <td>
+                    Address :
+                </td>
+                <td>
+                    {{i.order_address}}
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-sm-1" style="background:cn;margin-left:10px;height:100px;font-size: large;font: menu;border-radius:12px;margin-top:30px">
+<!--       <img src="/media/images/deliverd.jpg" alt="" width="100px" style="border-radius:12px">-->
+        {% if i.status %}
+        <img src="/media/images/success.png" alt="" width="100px" style="border-radius:12px">
+        {% else %}
+        <img src="/media/images/runnning.jpg" alt="" width="100px" style="border-radius:12px">
+        {% endif %}
+
+    </div>
+</div>
+{% endfor %}
+    {% endblock %}

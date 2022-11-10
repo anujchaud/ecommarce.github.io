@@ -1,0 +1,185 @@
+{% load cart %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>productalyourhome.com</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+<nav class="navbar navbar-dark bg-dark py-1">
+    <a href="/home" class="btn btn-primary btn-sm mx-4">Home</a>
+    <button type="button" class="btn btn-info btn-lm" data-toggle="modal" data-target="#myModal">Improve Your Address</button>
+</nav>
+
+<h1></h1>
+{% for i in data %}
+
+<table>
+    <div class="card mx-3 mt-1 mb-1 shadow d-flex justify-content-center" style="width:30%;hight:auto">
+        <tr>
+            <td><div>
+
+                <img src="/media/{{i.image}}" alt="Love" width="198px" height="auto">
+            </div>
+            </td>
+            <td>
+                <div class="card mx-3 mt-1 mb-1 shadow d-flex justify-content-center">
+                    <h3><table>
+                        <tr>
+                            <th>
+                                Product Name :
+                            </th>
+                            <td>
+                                {{i.pname}}
+                            </td>
+                        </tr>
+                         <tr>
+                            <th>
+                                Product Title :
+                            </th>
+                            <td>
+                                {{i.ptitle}}
+                            </td>
+                        </tr>
+                         <tr>
+                            <th>
+                                Product Catefory :
+                            </th>
+                            <td>
+                                {{i.cat}}
+                            </td>
+                        </tr>
+                         <tr>
+                            <th>
+                                Product Prize :
+                            </th>
+                            <td>
+                                {{i.prize}}
+                            </td>
+                        </tr>
+                        <tr>
+                            {% endfor %}
+
+
+
+                                <td>
+
+                                </td>
+                                </div>
+                            </td>
+        </tr>
+    </div>
+<!--                            -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+
+        </tr>                            _________________
+        </tr>
+</table>
+</div>
+{% for i in user_data %}
+
+    <div class="card mx-3 mt-1 mb-1 shadow d-flex justify-content-center" style="width:430px;hight:auto">
+        <form action="" method="post" class="form-control">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <th>
+                        Default Address:
+                    </th>
+                    <td>
+                        <input type="text" style="height:40px;width:550px" name="order_add" class="form-control" value="{{i.place}},{{i.road}},{{i.city}},{{i.state}}.{{i.cuntry}},{{i.pin}}">
+                    </td>
+                </tr>
+
+                <tr>
+                <th>
+                    Quantity :
+                </th>
+                <td>
+                    <input name="quantity" style="height:40px;width:550px" type="number" placeholder="Add your quantity">
+                </td>
+
+                </tr>
+                <tr>
+                <th>
+                    Quantity :
+                </th>
+                <td>
+                    <input style="height:40px;width:550px" type="submit" name="confirm" value="Confirm Order"">
+                </td>
+
+                </tr>
+                <tr>
+                {% for i in messages %}
+                <h3>{{i}}</h3>
+                {% endfor %}
+                </tr>
+
+            </table>
+        </form>
+                </div>
+            </td>
+
+{% endfor %}
+
+<div class="container">
+
+  <!-- Trigger the modal with a button -->
+{% for i in user_data %}
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Improve Your Address</h4>
+        </div>
+          <div class="modal-body">
+              <form action="" method="post">
+                  {% csrf_token %}
+                  <div class="form-group">
+                    <input type="text" name="cuntry" placeholder="Cuntry Name" value="{{i.cuntry}}" class="form-control">
+                  </div>
+
+                  <div class="form-group">
+                      <input type="text" name="state" placeholder="State Name" value="{{i.state}}" class="form-control">
+                  </div>
+
+                  <div class="form-group">
+                      <input type="text" name="city" placeholder="City Name" value="{{i.city}}" class="form-control">
+                  </div>
+
+                  <div class="form-group">
+                      <input type="text" name="landmark" placeholder="LandMark" value="{{i.landmark}}" class="form-control">
+                  </div>
+
+                  <div class="form-group">
+                      <input type="text" name="road" placeholder="Road" value="{{i.road}}" class="form-control">
+                  </div>
+
+                  <div class="form-group">
+                      <input type="text" name="place" placeholder="Nearset Place" value="{{i.place}}" class="form-control">
+                  </div>
+                  <div class="form-group">
+                      <input type="text" name="pin" placeholder="Area Pin" value="{{i.pin}}" class="form-control">
+                  </div>
+                  <input type="submit" class="form-control btn btn-primary" name="update" value="Update Address">
+              </form>
+          </div>
+<!--        <div class="modal-footer">-->
+<!--          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+<!--        </div>-->
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endfor %}
+</body>
+</html>

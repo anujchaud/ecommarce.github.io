@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>productalyourhome.com</title>
+    {% extends "base.html" %}
+    {% load cart %}
+</head>
+<body>
+{% block body %}
+<!--<h1 style="color:red">{{request.user}}</h1>-->
+
+<div class="row" style="background:1;margin-top:-x;">
+    <div class="col-sm-3" style="margin-top:10px;height:600px">
+        <div style="margin-left:10px">
+            {% for i in category_data %}
+
+            <div class="list-group">
+                <a href="?category={{i.cat}}" class="btn btn-danger list-group-item"><span class="badge">1299</span>{{i.cat}}</a>
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <div class="col-sm-9">
+        <div class="row">
+            {% for i in data %}
+            <div class="col-sm-2 shadow-lg p-3 mb-5 bg-body rounded"
+                 style="margin-bottom:10px;margin:5px;color:green;width:auto">
+
+                <div class="card bg-daner" style="width:20rem;margin:px">
+
+                    <div class="card-body" style="margin:px;overflow:hidden;">
+                        <img src="/media/{{i.image}}" alt="Love" width="200px" height=300px>
+                        <p class="card-text"><h5>{{i.pname}}</h5></p>
+                        <h4 class="card-title">Rs.{{i.prize}}{{i.quantity_type}}</h4>
+
+
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <input type="number" value="{{i.id}}" name="pid" hidden>
+                            <input type="submit" name="submit" value="Add To Cart"
+                                   class="btn btn-primary border col-sm-12" style="margin-left:px;margin-bottom:2px">
+
+                        </form>
+                        <a href="/order/{{i.id}}" class="btn btn-success border col-sm-12"
+                           style="margin-left:px;margin-bottom:5px">Place Order</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    {% endblock %}
+
+
+</body>
+</html>

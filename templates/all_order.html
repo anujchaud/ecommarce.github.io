@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>productalyourhome.com</title>
+    {% extends "base.html" %}
+    {% load cart %}
+</head>
+<body>
+{% block body %}
+
+{% for i in data %}
+<div class="row" style="margin-top:10px;">
+    <div class="col-sm-2" style="background:#1111;height:640px;width:400px;">
+        <div style="margin-left:20px;margin-top:20px;">
+            <img src="/media/{{i.image}}" alt="" height=auto width="340px">
+            <center><h2><thead>{{i.pname}}</thead></h2>
+        </div>
+    </div>
+    <div class="col-sm-3 mx-3" style="background:light ;height:280px;width:650px">
+
+        <div class="container">
+
+            <lable><h1><b>This is Prouct Information</b></h1></lable>
+            <div class="alert alert-success" style="width:560px;padding:5px"><strong>Great!!! by default Pay On Delivery is available!</strong></div>
+            <table>
+                <tr>
+                    <td>
+                        <h4>Product Name :</h4>
+                    </td>
+                    <th>
+                        <h4>{{i.pname}}</h4>
+                    </th>
+                </tr>
+
+                 <tr>
+                    <td>
+                        <h4>Product Title:</h4>
+                    </td>
+                    <th style="margin-left:10px">
+                        {{i.ptitle}}
+                    </th>
+                </tr>
+
+                 <tr>
+                    <td>
+                        <h4>Prize :</h4>
+                    </td>
+                    <th>
+                        RS.{{i.prize}} {{i.quantity_type}}
+                    </th>
+                </tr>
+
+                 <tr>
+                    <td>
+                        <h4>Avalable Stock:</h4>
+                    </td>
+                    <th>
+                        <h4>{{i.aval}}</h4>
+                    </th>
+                 </tr>
+            </form>
+        </div>
+        {% endfor %}
+        <form action="" method="post">
+            {% csrf_token %}
+            {% for i in user_data %}
+         <table>
+                <tr>
+                    <th>
+                        Default Address:
+                    </th>
+                    <td>
+                        <input type="text" style="height:40px;width:450px" name="order_add" class="form-control" value="{{i.place}},{{i.road}},{{i.city}},{{i.state}}.{{i.cuntry}},{{i.pin}}">
+                    </td>
+                </tr>
+                <tr>
+                <th>
+                    Quantity :
+                </th>
+                <td>
+                    <input name="quantity" style="height:40px;width:450px" type="number" placeholder="  Add your quantity">
+                </td>
+                </tr>
+                <tr>
+                <th>
+                    Quantity :
+                </th>
+                <td>
+                    <input style="height:40px;width:450px" type="submit" name="confirm" value="Confirm Order" placeholder="">
+                </td>
+                </tr>
+             <tr>
+             </tr>
+            </table>
+        </form>
+
+    </div>
+{% endfor %}
+    {% for i in messages %}
+                 <div class="alert alert-danger" style="width:580px;padding:5px">
+                     <strong></strong>{{i}}
+                 </div>
+                 {% endfor %}
+</div>
+<div class="col-sm-2 mx-3" style="background:re;height:640px;width:300px">
+    {% for i in page_obj %}
+
+    <div class="card mt-4 mx-5 shadow col d-flex justify-content-center" style="width:200px;hight:20px;margin-top:10px;margin-left:40px">
+                <img src="/media/{{i.image}}" alt="Love" width="198px" height=auto>
+                <div class="cord-body mb-8">
+
+                    <p class="card-text"><h5>{{i.pname}}</h5></p>
+                    <h4 class="card-title">Rs.{{i.prize}} {{i.quantity_type}}</h4>
+
+                    <div class="card-footer row no-gutters p-0">
+
+                     <a href="/order/{{i.id}}" style="margin-left:8px"class="btn btn-success border col-sm-11 mx-3 md-4">Place Order</a>
+                     </div>
+                </div>
+            </div>
+        {% endfor %}
+    <center>
+        {% if page_obj.has_previous %}
+        <a href="?page={{page_obj.previous_page_number}}" class="btn btn-primary" style="margin-top:10px"><-</a>
+        {% endif %}
+        {% if page_obj.has_next %}
+         <a href="?page={{page_obj.next_page_number}}" class="btn btn-primary" style="margin-top:10px">-></a>
+        {% endif %}
+    </div>
+</div>
+{% for i in user_data %}
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Improve Your Address</h4>
+        </div>
+          <div class="modal-body">
+              <form action="" method="post">
+                  {% csrf_token %}
+                  <div class="form-group">
+                    <input type="text" name="cuntry" placeholder="Cuntry Name" value="{{i.cuntry}}" class="form-control">
+                  </div>
+
+                  <div class="form-group">
+                      <input type="text" name="state" placeholder="State Name" value="{{i.state}}" class="form-control">
+                  </div>
+
+                  <div class="form-group">
+                      <input type="text" name="city" placeholder="City Name" value="{{i.city}}" class="form-control">
+                  </div>
+
+                  <div class="form-group">
+                      <input type="text" name="landmark" placeholder="LandMark" value="{{i.landmark}}" class="form-control">
+                  </div>
+
+                  <div class="form-group">
+                      <input type="text" name="road" placeholder="Road" value="{{i.road}}" class="form-control">
+                  </div>
+
+                  <div class="form-group">
+                      <input type="text" name="place" placeholder="Nearset Place" value="{{i.place}}" class="form-control">
+                  </div>
+                  <div class="form-group">
+                      <input type="text" name="pin" placeholder="Area Pin" value="{{i.pin}}" class="form-control">
+                  </div>
+                  <input type="submit" class="form-control btn btn-primary" name="update" value="Update Address">
+              </form>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% endblock %}
